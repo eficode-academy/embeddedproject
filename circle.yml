@@ -1,0 +1,85 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:latest
+    working_directory: ~/sheeeng/elpmaxe-mathy
+    steps:
+      - checkout
+      - run:
+          name: Update & Upgrade
+          command: |
+            set -x
+            sudo apt-get update
+            sudo apt-get upgrade
+      - run:
+          name: Setup Make Prerequisites
+          command: |
+            set -x
+            echo "Setup Make Prerequisites ..."
+            sudo apt-get install --yes build-essential
+            gcc --version
+      - run:
+          name: Make
+          command: 'make'
+      - run: 
+          name: Make Shared Library
+          command: 'make -f sharedlib.makefile'
+      - run: 
+          name: Make Static Library
+          command: 'make -f staticlib.makefile'
+      - run: 
+          name: Run
+          command: './bin/main a b c'
+      - store_artifacts:
+          path: bin/
+          destination: biny
+      - store_artifacts:
+          path: lib/
+          destination: liby
+  test:
+    docker:
+      - image: circleci/golang:latest
+    working_directory: ~/sheeeng/elpmaxe-mathy
+    steps:
+      - checkout
+      - run:
+          name: Update & Upgrade
+          command: |
+            set -x
+            sudo apt-get update
+            sudo apt-get upgrade
+      - run:
+          name: Setup Make Prerequisites
+          command: |
+            set -x
+            echo "Setup Make Prerequisites ..."
+            sudo apt-get install --yes build-essential
+            gcc --version
+      - run:
+          name: Make
+          command: 'make test'
+      - run:
+          name: Test using Catch
+          command: |
+            set -x
+            ./bin/test --durations yes --reporter compact --out bin/results_compact.txt
+            ./bin/test --durations yes --reporter console --out bin/results_console.txt
+            ./bin/test --durations yes --reporter junit --out bin/results_junit.xml
+            ./bin/test --durations yes --reporter xml --out bin/results_xml.xml
+      - store_artifacts:
+          path: bin/
+      - store_artifacts:
+          path: bin/
+          destination: biny
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
