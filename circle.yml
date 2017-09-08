@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/golang:latest
-    working_directory: ~/sheeeng/elpmaxe-mathy
+    working_directory: ~/sheeeng/omed-make
     steps:
       - checkout
       - run:
@@ -40,7 +40,7 @@ jobs:
   test:
     docker:
       - image: circleci/golang:latest
-    working_directory: ~/sheeeng/elpmaxe-mathy
+    working_directory: ~/sheeeng/omed-make
     steps:
       - checkout
       - run:
