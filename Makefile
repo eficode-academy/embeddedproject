@@ -42,6 +42,7 @@ bin/$(EXEC): $(OBJ)
 	@$(DIR_GUARD)
 	@echo "#" $(OBJ)
 	@$(LD) $(LDFLAGS) $^ -o $@ && echo "[OK]: $@"
+	@$@
 
 lib/libmathy.a: obj/mathy.o
 	@$(DIR_GUARD)
@@ -59,6 +60,7 @@ test: bin/$(EXEC_TEST)
 bin/$(EXEC_TEST): $(OBJ_TEST)
 	@$(DIR_GUARD)
 	@$(LD) $(LDFLAGS_TEST) $^ -o $@ && echo "[OK]: $@"
+	@$@
 
 #-----------------------------------------------------------------------
 
