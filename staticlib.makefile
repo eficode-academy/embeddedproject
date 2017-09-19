@@ -1,28 +1,41 @@
-CC=g++
+CXX             := g++
+LD              := g++
+
+WARNINGS        := -Wall -Wextra \
+                   -Warray-bounds \
+                   -Weffc++ \
+                   -Wno-parentheses \
+                   -Wpedantic \
+                   -Wwrite-strings
+FLAGS           := -std=c++11 $(WARNINGS)
+CXXFLAGS        := $(FLAGS)
+LDFLAGS         := $(FLAGS)
 
 ifeq ($(DEBUG),yes)
-	CXXFLAGS=-Wall -g
-	LDFLAGS=-Wall -g
+	CXXFLAGS := $(CXXFLAGS) -g
+	LDFLAGS := $(LDFLAGS) -g
 else
-	CXXFLAGS=-Wall
-	LDFLAGS=-Wall
+	CXXFLAGS := $(CXXFLAGS)
+	LDFLAGS := $(LDFLAGS)
 endif
 
-AR=ar
-ARFLAGS=rcs
+PROJECT_DIR := $(PWD)/omed-app
+OUTPUT_DIR := $(PWD)/out
 
-INCPATH=inc
-SRCPATH=src
-OBJPATH=obj
-LIBPATH=lib
-BINPATH=bin
+INCPATH=$(PROJECT_DIR)/inc
+SRCPATH=$(PROJECT_DIR)/src
+
+OBJPATH=$(OUTPUT_DIR)/obj
+LIBPATH=$(OUTPUT_DIR)/lib
+BINPATH=$(OUTPUT_DIR)/bin
 
 INC=$(INCPATH)/mathy.h
 SRC=$(SRCPATH)/mathy.cc
+
 OBJ=$(OBJPATH)/mathy.o
 OUT=$(LIBPATH)/libmathy.a
 
-INCLUDES=-I ./$(INCPATH)
+INCLUDES=-I $(INCPATH)
 
 DIR_GUARD=mkdir -pv $(@D)
 
@@ -30,11 +43,14 @@ default: $(OUT)
 
 $(OUT): $(OBJ)
 	@$(DIR_GUARD)
-	@$(AR) $(ARFLAGS) $@ $(OBJ) && echo "[OK]: $@"
+	echo "$$<" $<
+	echo "$$^" $^
+	echo "$$@" $@
+	$(AR) $(ARFLAGS) $@ $(OBJ) && echo "[OK]: $@"
 
-$(OBJPATH)/%.o: $(SRCPATH)/%.cc $(INC)
+$(OBJ): $(SRC)
 	@$(DIR_GUARD)
-	@$(CC) $(CXXFLAGS) $(INCLUDES) -c $< -o $@ && echo "[OK]: $@"
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@ && echo "[OK]: $@"
 
 .PHONY: clean cleanall
 
