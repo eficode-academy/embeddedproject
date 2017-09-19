@@ -12,6 +12,12 @@ WARNINGS     = "-Wall -Wextra \
                 -Wpedantic \
                 -Wwrite-strings"
 
+Dir.chdir "omed-app"
+
+puts("Project files moved into a single sub-directory.")
+puts("Update this Rakefile properly to reflect the move.");
+# abort("Exiting...")
+
 INC_FILES = Rake::FileList['inc/*.h']
 SRC_FILES = Rake::FileList["src/*.cc","tst/*.cc"]
 OBJ_FILES = SRC_FILES.ext(".o")
