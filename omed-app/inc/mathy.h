@@ -15,4 +15,4 @@ namespace Mathy
         // Returns a / b
         static double Divide(double a, double b);
     };
-} 
+}

@@ -7,7 +7,7 @@
 // https://github.com/philsquared/Catch/blob/master/test_package/MainTest.cpp
 
 unsigned int Factorial( unsigned int number ) {
-  return number > 1 ? Factorial(number-1)*number : 1;
+  	return number > 1 ? Factorial(number-1)*number : 1;
 }
 
 TEST_CASE( "Factorials are computed", "[factorial]" ) {
