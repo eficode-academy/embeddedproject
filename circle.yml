@@ -7,6 +7,18 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Interpolating Environment Variables to Set Other Environment Variables
+          # If you need to interpolate other environment variables to set an environment variable, the only place to do this at the moment is in bash.
+          # CircleCI 2.0 automatically sets a $BASH_ENV variable to a random name in /tmp, and will source this file for each step.
+          # https://circleci.com/docs/2.0/env-vars/#interpolating-environment-variables-to-set-other-environment-variables
+          command: |
+            echo 'export DEBIAN_FRONTEND=noninteractive' >> $BASH_ENV
+            echo 'export PROJECT_DIR=${PWD}/omed-app' >> $BASH_ENV
+            echo 'export OUTPUT_DIR=${PWD}/out' >> $BASH_ENV
+            ls -al ${PWD}
+            ls -al ${PROJECT_DIR}
+            ls -al ${OUTPUT_DIR}
+      - run:
           name: Update & Upgrade
           command: |
             set -x
@@ -22,20 +34,22 @@ jobs:
       - run:
           name: Make
           command: 'make'
-      - run: 
+      - run:
           name: Make Shared Library
           command: 'make -f sharedlib.makefile'
-      - run: 
+      - run:
           name: Make Static Library
           command: 'make -f staticlib.makefile'
-      - run: 
+      - run:
           name: Run
-          command: './bin/main a b c'
+          command: '${OUTPUT_DIR}/bin/main a b c'
       - store_artifacts:
-          path: bin/
+          path: ${OUTPUT_DIR}
+      - store_artifacts:
+          path: ${OUTPUT_DIR}/bin
           destination: biny
       - store_artifacts:
-          path: lib/
+          path: ${OUTPUT_DIR}/lib
           destination: liby
   test:
     docker:
@@ -43,6 +57,18 @@ jobs:
     working_directory: ~/sheeeng/omed-make
     steps:
       - checkout
+      - run:
+          name: Interpolating Environment Variables to Set Other Environment Variables
+          # If you need to interpolate other environment variables to set an environment variable, the only place to do this at the moment is in bash.
+          # CircleCI 2.0 automatically sets a $BASH_ENV variable to a random name in /tmp, and will source this file for each step.
+          # https://circleci.com/docs/2.0/env-vars/#interpolating-environment-variables-to-set-other-environment-variables
+          command: |
+            echo 'export DEBIAN_FRONTEND=noninteractive' >> $BASH_ENV
+            echo 'export PROJECT_DIR=${PWD}/omed-app' >> $BASH_ENV
+            echo 'export OUTPUT_DIR=${PWD}/out' >> $BASH_ENV
+            ls -al ${PWD}
+            ls -al ${PROJECT_DIR}
+            ls -al ${OUTPUT_DIR}
       - run:
           name: Update & Upgrade
           command: |
@@ -63,14 +89,14 @@ jobs:
           name: Test using Catch
           command: |
             set -x
-            ./bin/test --durations yes --reporter compact --out bin/results_compact.txt
-            ./bin/test --durations yes --reporter console --out bin/results_console.txt
-            ./bin/test --durations yes --reporter junit --out bin/results_junit.xml
-            ./bin/test --durations yes --reporter xml --out bin/results_xml.xml
+            ${OUTPUT_DIR}/bin/test --durations yes --reporter compact --out bin/results_compact.txt
+            ${OUTPUT_DIR}/bin/test --durations yes --reporter console --out bin/results_console.txt
+            ${OUTPUT_DIR}/bin/test --durations yes --reporter junit --out bin/results_junit.xml
+            ${OUTPUT_DIR}/bin/test --durations yes --reporter xml --out bin/results_xml.xml
       - store_artifacts:
-          path: bin/
+          path: ${OUTPUT_DIR}/bin
       - store_artifacts:
-          path: bin/
+          path: ${OUTPUT_DIR}/bin
           destination: biny
 workflows:
   version: 2
