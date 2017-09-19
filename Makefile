@@ -45,7 +45,9 @@ all: main
 main: $(EXEC_FILE)
 $(EXEC_FILE): $(OBJ)
 	@$(DIR_GUARD)
-	@echo "#" $(OBJ)
+	@echo "$$<" $<
+	@echo "$$^" $^
+	@echo "$$@" $@
 	@$(LD) $(LDFLAGS) $^ -o $@ && echo "[OK]: $@"
 	@$@
 
