@@ -65,7 +65,7 @@ $(OUTPUT_DIR)/lib/libmathy.so: $(OUTPUT_DIR)/obj/mathy.o
 	@echo "$$<" $<
 	@echo "$$^" $^
 	@echo "$$@" $@
-	@$(CC) $(LDFLAGS) -shared -o $@ $^ && echo "[OK]: $@"
+	@$(CXX) $(LDFLAGS) -shared -o $@ $^ && echo "[OK]: $@"
 
 #-----------------------------------------------------------------------
 
