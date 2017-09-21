@@ -4,6 +4,10 @@ compiler:
   - clang
   - gcc
 
+before_install:
+  - sudo apt-get update --quiet
+  - sudo apt-get install --yes build-essentail
+
 script:
   - clang --version
   - gcc --version
