@@ -13,3 +13,5 @@ script:
   - gcc --version
   - make
   - make test
+  - make -f sharedlib.makefile
+  - make -f staticlib.makefile
