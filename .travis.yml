@@ -6,7 +6,7 @@ compiler:
 
 before_install:
   - sudo apt-get update --quiet
-  - sudo apt-get install --yes build-essentail
+  - sudo apt-get install --yes build-essential
 
 script:
   - clang --version
