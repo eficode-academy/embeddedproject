@@ -19,7 +19,7 @@ else
 	LDFLAGS := $(LDFLAGS)
 endif
 
-PROJECT_DIR := $(PWD)/omed-app
+PROJECT_DIR := $(PWD)/native-app
 OUTPUT_DIR := $(PWD)/out
 
 INCPATH=$(PROJECT_DIR)/inc
