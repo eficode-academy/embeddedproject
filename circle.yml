@@ -13,7 +13,7 @@ jobs:
           # https://circleci.com/docs/2.0/env-vars/#interpolating-environment-variables-to-set-other-environment-variables
           command: |
             echo 'export DEBIAN_FRONTEND=noninteractive' >> $BASH_ENV
-            echo 'export PROJECT_DIR=${PWD}/omed-app' >> $BASH_ENV
+            echo 'export PROJECT_DIR=${PWD}/native-app' >> $BASH_ENV
             echo 'export OUTPUT_DIR=${PWD}/out' >> $BASH_ENV
             ls -al ${PWD}
             ls -al ${PROJECT_DIR}
