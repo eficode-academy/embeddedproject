@@ -4,6 +4,11 @@ compiler:
   - clang
   - gcc
 
+notifications:
+  email:
+    on_success: never # default: change
+    on_failure: change # default: always
+
 before_install:
   - sudo apt-get update --quiet
   - sudo apt-get install --yes build-essential
