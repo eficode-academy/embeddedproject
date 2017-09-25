@@ -13,7 +13,7 @@ WARNINGS        := -Wall -Wextra \
                    -Wpedantic \
                    -Wwrite-strings
 
-PROJECT_DIR     := $(PWD)/omed-app
+PROJECT_DIR     := $(PWD)/native-app
 OUTPUT_DIR      := $(PWD)/out
 
 EXEC_NAME        = main
