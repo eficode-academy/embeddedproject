@@ -12,6 +12,8 @@
 
 Building with [GNU Make](https://www.gnu.org/software/make/).
 
+See [native](https://github.com/Praqma/native) repository for more examples.
+
 <!-- GitHub
 
 [![GitHub Stars](https://img.shields.io/github/stars/praqma/native-example-make.svg?style=social&label=Star)](https://img.shields.io/github/stars/praqma/native-example-make.svg?style=social&label=Star)
