@@ -10,13 +10,12 @@
 ![](https://img.shields.io/github/release/praqma/native-example-make.svg)
 ![](https://img.shields.io/github/issues/praqma/native-example-make.svg)
 
-Building with [GNU Make](https://www.gnu.org/software/make/).
+Building with [GNU Make](https://www.gnu.org/software/make/) inside [container](https://hub.docker.com/r/praqma/native-make/).
 
 See [native](https://github.com/Praqma/native) repository for more examples.
 
 ## Steps
 
-* Build image: `./docker-build.sh`
 * Run container: `./docker-run.sh`
 * Build example (inside container): `./build.sh`
 * Test example (inside container): `./test.sh`
