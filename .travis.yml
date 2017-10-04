@@ -1,3 +1,8 @@
+sudo: required
+
+services:
+  - docker
+
 language: cpp
 
 compiler:
@@ -10,13 +15,10 @@ notifications:
     on_failure: change # default: always
 
 before_install:
-  - sudo apt-get update --quiet
-  - sudo apt-get install --yes build-essential
+  - git submodule update --init
+  - docker pull praqma/native-make:latest
 
 script:
-  - clang --version
-  - gcc --version
-  - make
-  - make test
-  - make -f sharedlib.makefile
-  - make -f staticlib.makefile
+  - ls -al ${PWD}
+  - docker run --rm --workdir=/workspace --volume ${PWD}:/workspace praqma/native-make:latest ./build.sh
+  - docker run --rm --workdir=/workspace --volume ${PWD}:/workspace praqma/native-make:latest ./test.sh
