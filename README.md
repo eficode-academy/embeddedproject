@@ -13,3 +13,10 @@
 Building with [GNU Make](https://www.gnu.org/software/make/).
 
 See [native](https://github.com/Praqma/native) repository for more examples.
+
+## Steps
+
+* Build image: `./docker-build.sh`
+* Run container: `./docker-run.sh`
+* Build example (inside container): `./build.sh`
+* Test example (inside container): `./test.sh`
