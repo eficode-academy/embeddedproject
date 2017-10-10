@@ -4,8 +4,8 @@ Toggley::Toggley()
   : _toggley_state(ToggleyState::STATE_OFF) {
 }
 
-Toggley::Toggley(ToggleyState toggleyState) {
-    _toggley_state = toggleyState;
+Toggley::Toggley(ToggleyState toggleyState)
+  : _toggley_state(toggleyState) {
 }
 
 void Toggley::toggle() {
