@@ -14,6 +14,4 @@ if [ "$PWD" != "$WORKSPACE_DIR" ]; then
   exit 1
 fi
 
-make
-make -f sharedlib.makefile
-make -f staticlib.makefile
+make all
