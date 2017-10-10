@@ -64,10 +64,7 @@ $(OUTPUT_DIR)/lib/libmathy.so: $(OUTPUT_DIR)/obj/mathy.o
 .PHONY: test
 test: test_exe
 	$(TEST_EXEC_FILE)
-	$(TEST_EXEC_FILE) --durations yes --reporter compact --out ${OUTPUT_DIR}/bin/results_compact.txt
-	$(TEST_EXEC_FILE) --durations yes --reporter console --out ${OUTPUT_DIR}/bin/results_console.txt
-	$(TEST_EXEC_FILE) --durations yes --reporter junit --out ${OUTPUT_DIR}/bin/results_junit.xml
-	$(TEST_EXEC_FILE) --durations yes --reporter xml --out ${OUTPUT_DIR}/bin/results_xml.xml
+	@$(TEST_EXEC_FILE) -o out/bin/results_junit.xml --durations yes --reporter junit
 
 test_exe: $(TEST_EXEC_FILE)
 $(TEST_EXEC_FILE): $(OBJ_TEST)
