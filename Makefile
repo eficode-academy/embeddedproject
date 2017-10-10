@@ -13,8 +13,8 @@ WARNINGS        := -Wall -Wextra \
                    -Wpedantic \
                    -Wwrite-strings
 
-PROJECT_DIR     := $(PWD)/native-app
-OUTPUT_DIR      := $(PWD)/out
+PROJECT_DIR     := $(shell pwd)/native-app
+OUTPUT_DIR      := $(shell pwd)/out
 
 EXEC_NAME        = main
 EXEC_FILE       := $(OUTPUT_DIR)/bin/$(EXEC_NAME)
