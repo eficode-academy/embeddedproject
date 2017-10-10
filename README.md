@@ -14,6 +14,23 @@ Building with [GNU Make](https://www.gnu.org/software/make/) inside [container](
 
 See [native](https://github.com/Praqma/native) repository for more examples.
 
+## Exercise 1 - Create your own fork of this project
+
+Make your own fork of this project for you to develop on.
+
+## Exercise 2 - Build and test your project on the jenkins servier
+
+    make clean
+    make all
+    make test
+
+## Exercise 3 - Test results
+
+Add a `Post Build Action` to your job to publish the junit test result.
+
+## Exercise 4 - Publish Artifacts
+
+Add a `Post Build Action` to your job to publish the binary.
 ## Steps
 
 * Run container: `./docker-run.sh`
