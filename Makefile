@@ -39,60 +39,48 @@ DIR_GUARD		 = mkdir -pv $(@D)
 .SUFFIXES:
 
 #-----------------------------------------------------------------------
+#   Rules
+#-----------------------------------------------------------------------
 
 .PHONY: all
 all: shared_library static_library main test
+
 main: $(EXEC_FILE)
 $(EXEC_FILE): $(OBJ)
 	@$(DIR_GUARD)
-	@echo "$$<" $<
-	@echo "$$^" $^
-	@echo "$$@" $@
 	@$(LD) $(LDFLAGS) $^ -o $@ && echo "[OK]: $@"
 	@$@
 
 static_library: $(OUTPUT_DIR)/lib/libmathy.a
 $(OUTPUT_DIR)/lib/libmathy.a: $(OUTPUT_DIR)/obj/mathy.o
 	@$(DIR_GUARD)
-	@echo "$$<" $<
-	@echo "$$^" $^
-	@echo "$$@" $@
 	@$(AR) $(ARFLAGS) $@ $^ && echo "[OK]: $@"
 
 shared_library: $(OUTPUT_DIR)/lib/libmathy.so
 $(OUTPUT_DIR)/lib/libmathy.so: $(OUTPUT_DIR)/obj/mathy.o
 	@$(DIR_GUARD)
-	@echo "$$<" $<
-	@echo "$$^" $^
-	@echo "$$@" $@
 	@$(CXX) $(LDFLAGS) -shared -o $@ $^ && echo "[OK]: $@"
 
-#-----------------------------------------------------------------------
-
 .PHONY: test
-test: $(TEST_EXEC_FILE)
+test: test_exe
+	$(TEST_EXEC_FILE)
+	$(TEST_EXEC_FILE) --durations yes --reporter compact --out ${OUTPUT_DIR}/bin/results_compact.txt
+	$(TEST_EXEC_FILE) --durations yes --reporter console --out ${OUTPUT_DIR}/bin/results_console.txt
+	$(TEST_EXEC_FILE) --durations yes --reporter junit --out ${OUTPUT_DIR}/bin/results_junit.xml
+	$(TEST_EXEC_FILE) --durations yes --reporter xml --out ${OUTPUT_DIR}/bin/results_xml.xml
+
+test_exe: $(TEST_EXEC_FILE)
 $(TEST_EXEC_FILE): $(OBJ_TEST)
 	@$(DIR_GUARD)
 	@$(LD) $(LDFLAGS_TEST) $^ -o $@ && echo "[OK]: $@"
-	@$@
-
-#-----------------------------------------------------------------------
 
 $(OUTPUT_DIR)/obj/%.o: $(PROJECT_DIR)/src/%.cc
 	@$(DIR_GUARD)
-	@echo "$$<" $<
-	@echo "$$^" $^
-	@echo "$$@" $@
 	@$(CXX) $(CXXFLAGS) -c $< $(INC) -o $@ && echo "[OK]: $@"
 
 $(OUTPUT_DIR)/obj/%.o: $(PROJECT_DIR)/tst/%.cc
 	@$(DIR_GUARD)
-	@echo "$$<" $<
-	@echo "$$^" $^
-	@echo "$$@" $@
 	@$(CXX) $(CXXFLAGS_TEST) -c $< $(INC_TEST) -o $@ && echo "[OK]: $@"
-
-#-----------------------------------------------------------------------
 
 .PHONY: clean, clear
 clean clear:
@@ -103,5 +91,3 @@ clean clear:
 .PHONY: archive, zip
 archive zip:
 	@zip -x $(OUTPUT_DIR)/bin/* $(OUTPUT_DIR)/obj/* $(OUTPUT_DIR)/lib/* -q -r $(OUTPUT_DIR)/bin/$(EXEC)-$(shell date '+%F').zip . && echo "[OK]: $(OUTPUT_DIR)/bin/$(EXEC)-$(shell date '+%F').zip"
-
-#-----------------------------------------------------------------------
