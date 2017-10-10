@@ -20,5 +20,5 @@ before_install:
 
 script:
   - ls -al ${PWD}
-  - docker run --rm --workdir=/workspace --volume ${PWD}:/workspace praqma/native-make:latest ./build.sh
-  - docker run --rm --workdir=/workspace --volume ${PWD}:/workspace praqma/native-make:latest ./test.sh
+  - docker run --rm --workdir=/workspace --volume ${PWD}:/workspace praqma/native-make:latest make all
+  - docker run --rm --workdir=/workspace --volume ${PWD}:/workspace praqma/native-make:latest make test
