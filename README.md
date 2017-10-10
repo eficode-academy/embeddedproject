@@ -17,5 +17,5 @@ See [native](https://github.com/Praqma/native) repository for more examples.
 ## Steps
 
 * Run container: `./docker-run.sh`
-* Build example (inside container): `./build.sh`
-* Test example (inside container): `./test.sh`
+* Build example (inside container): `make all`
+* Test example (inside container): `make test`

@@ -20,7 +20,7 @@ jobs:
       - checkout
       - run:
           name: Test
-          command: ./test.sh
+          command: make test
 workflows:
   version: 2
   build_and_test:
