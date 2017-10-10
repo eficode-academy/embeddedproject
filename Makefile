@@ -43,7 +43,7 @@ DIR_GUARD		 = mkdir -pv $(@D)
 #-----------------------------------------------------------------------
 
 .PHONY: all
-all: shared_library static_library main test
+all: shared_library static_library main test_exe
 
 main: $(EXEC_FILE)
 $(EXEC_FILE): $(OBJ)
@@ -73,6 +73,7 @@ test_exe: $(TEST_EXEC_FILE)
 $(TEST_EXEC_FILE): $(OBJ_TEST)
 	@$(DIR_GUARD)
 	@$(LD) $(LDFLAGS_TEST) $^ -o $@ && echo "[OK]: $@"
+	@$@
 
 $(OUTPUT_DIR)/obj/%.o: $(PROJECT_DIR)/src/%.cc
 	@$(DIR_GUARD)
