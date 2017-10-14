@@ -80,6 +80,17 @@ Change your jenkins job to use the Jenkinsfile insead of the code manually enter
 **Congratulations, now you have a version controlled pipeline!**
 -----------------
 
+### 8. Run your build in a defined environment
+
+Use the [native make docker image](https://hub.docker.com/r/praqma/native-make/) to build in a docker container.  Here's a bit of cheat to get headed in the right direction:
+
+```
+node{
+withDockerContainer('ubuntu:latest') {
+    sh 'echo "hello world"'
+}}
+```
+
 # Development commands
 
 * Run container: `./docker-run.sh`
