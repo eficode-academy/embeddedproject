@@ -32,7 +32,7 @@ Add a `Post Build Action` to your job to publish the junit test result.
 
 Add a `Post Build Action` to your job to publish the binary.
 
-## 5. Making the pipeline script work
+## Exercise 5 - Making the pipeline script work
 Now you have made a really nice pipeline in Jenkins just using the normal jobs.
 Now we want it *as code*!
 
@@ -48,7 +48,7 @@ The result should very well be that you have a blue (successful) build, and in t
 
 We have to look into that now, *don't we?*
 
-## 6. Convert your pipeline
+## Exercise 6 - Convert your pipeline
 
 In pipeline, we like `stages` as they give us the ability to see where in the process things are going wrong.
 So take a look at your old build script and transfer the things you did there to the jenkins script.
@@ -72,7 +72,7 @@ Make three stages that does the following:
 
 Run this to see that it's working. The archiving part can be verified by looking for a small blue arrow next to the build number in the overview. Make sure you get your exe file with you there.
 
-## 7. Add the pipeline to your repository
+## Exercise 7 - Add the pipeline to your repository
 
 Create a file in your repository called `Jenkinsfile` and copy your pipeline script in it.
 Change your jenkins job to use the Jenkinsfile insead of the code manually entered in the configuration page.  You will need to select `Pipeline Script from SCM` in the Definition dropdown menu.
@@ -80,7 +80,7 @@ Change your jenkins job to use the Jenkinsfile insead of the code manually enter
 **Congratulations, now you have a version controlled pipeline!**
 -----------------
 
-## 8. Run your build in a defined environment
+## Exercise 8 - Run your build in a defined environment
 
 Use the [native make docker image](https://hub.docker.com/r/praqma/native-make/) to build in a docker container.  Here's a bit of cheat to get headed in the right direction:
 
