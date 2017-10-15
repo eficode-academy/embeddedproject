@@ -56,7 +56,8 @@ So take a look at your old build script and transfer the things you did there to
 If you cant remember the syntax for creating stages, then here is the hello world example of it:
 
 ```
-node {
+pipeline {
+    agent any
     stage ('Hello'){
         echo 'Hello World'
     }
@@ -80,18 +81,19 @@ Change your jenkins job to use the Jenkinsfile insead of the code manually enter
 **Congratulations, now you have a version controlled pipeline!**
 -----------------
 
-## Exercise 8 - Run your build in a defined environment
+## Exercise 8 - Multibranch pipeline
 
-Use the [native make docker image](https://hub.docker.com/r/praqma/native-make/) to build in a docker container.  Here's a bit of cheat to get headed in the right direction:
+Convert your pipeline to Multibranch
 
-```
-node{
-withDockerContainer('ubuntu:latest') {
-    sh 'echo "hello world"'
-}}
-```
+## Exercise 9 - Run your build in a defined environment
 
-### 8.5 Extra credit
+Use the [native make docker image](https://hub.docker.com/r/praqma/native-make/) to build in a docker container.  Follow [the documentation](https://jenkins.io/doc/book/pipeline/docker/) to run your pipeline in a container.
+
+
+[https://jenkins.io/doc/book/pipeline/docker/#using-multiple-containers](https://jenkins.io/doc/book/pipeline/docker/#using-multiple-containers)
+
+
+### 9.5 Extra credit
 
 Make your own image for build, share it on docker hub, and use that in your build.
 
