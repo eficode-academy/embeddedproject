@@ -5,7 +5,7 @@ plugins {
 buildproperties.publishing {
     zip {
         into('bin'){
-            from file('out/bin/*')
+            from 'out/bin'
         }
     }
 }
