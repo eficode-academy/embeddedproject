@@ -5,7 +5,7 @@ plugins {
 buildproperties.publishing {
     zip {
         into('bin'){
-            from file('native-app/out/bin/main')
+            from file('out/bin/main')
         }
     }
 }
