@@ -108,14 +108,24 @@ If you have docker running locally, you can try running the build like this:
 
     docker run --rm -it -v ~/.m2:/root/.m2 -v $(pwd):/code -w /code praqma/native-gradle ./gradlew publishToMavenLocal
 
+To build with gradle in your fork:
+
  1. Change your Jenkinsfile to use the `praqma/native-gradle` docker image in the build.
  2. Change your `artifact` in the `build.properties` to create a more personal artifact name.
  3. Delete the 'Test' stage of the pipeline.  We will now run the tests during build.
- 3. Replace `make all` with `gradlew publishToMavenLocal`
+ 4. Replace `make all` with `gradlew publishToMavenLocal`
+ 5. Capture the artifact `build/distributions/*.zip`
 
-### 10.5 Publish the artifact
+Extra Credit:
 
-##11. Artifactory
+ 1. Change the source code to include `version.h` and get the application to report it's version when run.
+
+### 10.1 Publish the artifact
+
+
+## 11. Artifactory
+
+### 11.1 Auto-incrementing version numbers
 
 # Development commands
 
