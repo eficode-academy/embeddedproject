@@ -1,0 +1,11 @@
+plugins {
+    id "net.praqma.vba" version "2.0.0"
+}
+
+buildproperties.publishing {
+    zip {
+        into('bin'){
+            from file('native-app/out/bin/main')
+        }
+    }
+}

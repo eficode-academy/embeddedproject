@@ -1,6 +1,14 @@
 # Build dir
 out/
 
+# Gradle build dir
+build/
+.gradle/
+
+# Generated version files
+native-app/inc/build.h
+native-app/inc/version.h
+
 # Prerequisites
 *.d
 

@@ -79,6 +79,7 @@ Create a file in your repository called `Jenkinsfile` and copy your pipeline scr
 Change your jenkins job to use the Jenkinsfile insead of the code manually entered in the configuration page.  You will need to select `Pipeline Script from SCM` in the Definition dropdown menu.
 
 **Congratulations, now you have a version controlled pipeline!**
+
 -----------------
 
 ## Exercise 8 - Multibranch pipeline
@@ -97,8 +98,17 @@ Use the [native make docker image](https://hub.docker.com/r/praqma/native-make/)
 
 Make your own image for build, share it on docker hub, and use that in your build.
 
+-------------------
 
+## 10. Build with gradle
 
+There are gradle build files to package your application.  Take a look at `build.gradle` and `build.properties`.  We are using the [VersionedBinaryArtifacts](https://github.com/Praqma/VersionedBinaryArtifacts) plugin to build a versioned zip file of the binary we produce.
+
+If you have docker running locally, you can try running the build like this:
+
+    docker run --rm -it -v ~/.m2:/root/.m2 -v $(pwd):/code -w /code praqma/native-gradle ./gradlew publishToMavenLocal
+
+ * Change your pipeline to use the `praqma/`
 
 # Development commands
 
