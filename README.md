@@ -120,12 +120,15 @@ Extra Credit:
 
  1. Change the source code to include `version.h` and get the application to report it's version when run.
 
-### 10.1 Publish the artifact
 
 
 ## 11. Artifactory
+### 11.1 Publish the artifact
+### 11.2 Auto-incrementing version numbers
 
-### 11.1 Auto-incrementing version numbers
+
+------------------
+
 
 # Development commands
 
