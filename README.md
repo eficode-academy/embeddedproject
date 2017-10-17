@@ -58,8 +58,12 @@ If you cant remember the syntax for creating stages, then here is the hello worl
 ```
 pipeline {
     agent any
-    stage ('Hello'){
-        echo 'Hello World'
+    stages {
+        stage ('Hello'){
+            steps{
+                sh "echo 'Hello World'"
+            }
+        }
     }
 }
 ```
