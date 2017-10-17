@@ -100,7 +100,7 @@ Make your own image for build, share it on docker hub, and use that in your buil
 
 -------------------
 
-## 10. Build with gradle
+## Exercise 10 - Build with gradle
 
 There are gradle build files to package your application.  Take a look at `build.gradle` and `build.properties`.  We are using the [VersionedBinaryArtifacts](https://github.com/Praqma/VersionedBinaryArtifacts) plugin to build a versioned zip file of the binary we produce.
 
@@ -123,8 +123,45 @@ Extra Credit:
 
 
 ## 11. Artifactory
+
+We have set up a artifactory server on port 8081.  Mike will give you a username/password.
+
 ### 11.1 Publish the artifact
+
+To publish the artifact we need to do two steps:
+
+ 1. Get some publishing secrets in our docker build environment a file `~/.gradle/gradle.properties`
+
+    docker {
+        image 'praqma/native-gradle'
+        args '-v $HOME/.m2:/home/jenkins/.m2'
+        args '-v $HOME/.gradle:/home/jenkins/.gradle'
+    }
+
+ 2. Change our gradle task from `publishToMavenLocal` to `publish`
+ 3. Push these changes and do a build...you should now be able to see your artifact in artifactory.
+
+Try to publish the artifact a second time.  It should fail with a message like this:
+
+````
+Execution failed for task ':publishDefaultPubPublicationToMavenRepository'.
+> Failed to publish publication 'defaultPub' to repository 'maven'
+   > Could not write to resource 'http://embedded.praqma.com:8081/artifactory/libs-release-local/net/praqma/embedded-project/1.0.5/embedded-project-1.0.5.zip'.
+      > Could not PUT 'http://embedded.praqma.com:8081/artifactory/libs-release-local/net/praqma/embedded-project/1.0.5/embedded-project-1.0.5.zip'. Received status code 403 from server: Forbidden
+````
 ### 11.2 Auto-incrementing version numbers
+
+ 1. Add the [Version Increment plugin](https://github.com/Praqma/versionincrement) to the `build.gradle`.
+ 2. Add a stage to bump the version number as a pre-build step.  You can get some inspiration from the [example repo](https://github.com/naesheim/VBAdemo)
+
+### 11.3 Re-use with artifactory
+
+Split out the library `libmathy` build to it's own pipeline.  Consume that in the application build.
+
+## Exercise 12 - Implement the Phlow
+
+ * Follow the instructions to set up the git extention here: [https://github.com/Praqma/git-phlow](https://github.com/Praqma/git-phlow)
+ * Set up the issue labels in github using the ghi tool as described here: [https://www.praqma.com/stories/a-pragmatic-workflow/](https://www.praqma.com/stories/a-pragmatic-workflow/)
 
 
 ------------------
