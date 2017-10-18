@@ -95,7 +95,7 @@ Convert your pipeline to Multibranch
 Use the [native make docker image](https://hub.docker.com/r/praqma/native-make/) to build in a docker container.  Follow [the documentation](https://jenkins.io/doc/book/pipeline/docker/) to run your pipeline in a container.
 
 
-[https://jenkins.io/doc/book/pipeline/docker/#using-multiple-containers](https://jenkins.io/doc/book/pipeline/docker/#using-multiple-containers)
+[https://jenkins.io/doc/book/pipeline/docker/](https://jenkins.io/doc/book/pipeline/docker/)
 
 
 ### 9.5 Extra credit
